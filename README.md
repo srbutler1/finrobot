@@ -45,50 +45,111 @@ FinRobot is an AI-powered financial analysis system that leverages large languag
 - **Investment Recommendations**: Generates comprehensive investment recommendations based on fundamental and technical analysis
 - **Multi-Agent Workflow**: Coordinates between specialized agents for a complete investment analysis pipeline
 
-## Scripts
-
-### Investment Workflow
-`scripts/run_investment_workflow.py` - Runs a coordinated workflow that analyzes a company's annual report and provides investment recommendations based on that analysis.
-
-### Annual Report Analyzer
-`scripts/run_annual_report_analyzer.py` - Analyzes a company's annual report and SEC filings to extract key financial metrics, risks, and growth opportunities.
-
-### Investment Recommendation
-`scripts/run_investment_recommendation.py` - Generates investment recommendations based on annual report analysis.
-
-### Trade Strategist
-`scripts/run_trade_strategist.py` - Provides trading strategies and investment recommendations based on financial data.
-
-## Setup
+## Installation and Setup
 
 ### Prerequisites
-- Python 3.8+
-- Required API keys:
-  - OpenAI API key
-  - SEC API key
-  - Finnhub API key (optional)
-  - Alpha Vantage API key (optional)
+- Python 3.8 or higher
+- pip (Python package installer)
+- Git
 
-### Installation
-1. Clone the repository
-2. Install dependencies: `pip install -r requirements.txt`
-3. Set up API keys:
-   - Copy `config_template.json` to `FinRobot/config_api_keys`
-   - Copy `OAI_CONFIG_LIST.template.json` to `FinRobot/OAI_CONFIG_LIST`
-   - Add your API keys to these files
-   - Alternatively, run `python scripts/setup_api_keys.py` for a guided setup
+### Quick Setup (Recommended)
 
-### Security Note
-API key files are included in `.gitignore` to prevent accidental commits of sensitive information. Never commit your actual API keys to the repository.
+We provide a setup script that automates the entire installation process:
+
+```bash
+# Clone the repository
+git clone https://github.com/srbutler1/finrobot.git
+cd finrobot
+
+# Run the setup script
+./setup_environment.sh
+```
+
+This script will:
+1. Create and activate a virtual environment
+2. Install all dependencies
+3. Clone the original FinRobot repository if needed
+4. Guide you through API key setup
+
+### Manual Installation Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/srbutler1/finrobot.git
+   cd finrobot
+   ```
+
+2. **Create and activate a virtual environment (recommended)**
+   ```bash
+   python -m venv finrobot_venv
+   source finrobot_venv/bin/activate  # On Windows: finrobot_venv\Scripts\activate
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r scripts/requirements.txt
+   pip install -e .
+   ```
+
+4. **Set up API keys**
+   ```bash
+   python scripts/setup_config.py
+   ```
+   You will be prompted to enter your API keys for:
+   - OpenAI API
+   - SEC API
+   - Finnhub API
+   - Alpha Vantage API
+
+### Important Note on Dependencies
+
+This repository contains scripts that depend on the original FinRobot package. To use these scripts, you need to:
+
+1. **Clone the original FinRobot repository**
+   ```bash
+   git clone https://github.com/AI4Finance-Foundation/FinRobot.git
+   ```
+
+2. **Install the original FinRobot package**
+   ```bash
+   cd FinRobot
+   pip install -e .
+   cd ..
+   ```
+
+3. **Ensure both repositories are at the same directory level**
+   The scripts expect the FinRobot directory to be in the same parent directory as this repository.
 
 ## Usage
-```bash
-# Run the menu-based interface
-./run.sh
 
-# Or run individual scripts directly
+You can run the scripts using the shell script or directly with Python:
+
+### Using the shell script
+
+```bash
+./run.sh
+```
+
+This will present a menu with various options to run different components of the system.
+
+### Running scripts directly
+
+```bash
+# Run investment recommendation
+python scripts/run_investment_recommendation.py
+
+# Run annual report analyzer
+python scripts/run_annual_report_analyzer.py
+
+# Run trade strategist
+python scripts/run_trade_strategist.py
+
+# Run investment workflow
 python scripts/run_investment_workflow.py
 ```
+
+## Security Note
+API key files are included in `.gitignore` to prevent accidental commits of sensitive information. Never commit your actual API keys to the repository.
 
 ## License
 MIT License
